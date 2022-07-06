@@ -25,7 +25,7 @@ const run = async (): Promise<void> => {
     const token = core.getInput('repo-token', { required: true });
     const octokit = getOctokit(token);
 
-    // Get all teams in the organization where the PR author is a member
+    // Block the given branch for specific entities
     await blockBranch(octokit, owner, repo, branchName, users, teams, apps);
   } catch (error) {
     if (error instanceof Error) {
