@@ -6,18 +6,13 @@ import { blockBranch } from './octokit-queries';
 const run = async (): Promise<void> => {
   try {
     const branchName = core.getInput('branch-name', { required: true });
-    const users = core.getMultilineInput('users', { required: true });
-    const teams = core.getMultilineInput('teams', { required: true });
-    const apps = core.getMultilineInput('apps', { required: true });
+    const users = core.getInput('users', { required: true });
+    const teams = core.getInput('teams', { required: true });
+    const apps = core.getInput('apps', { required: true });
 
-    // Get author, PR number from context
-    const pullRequest = context.payload.pull_request;
-
-    if (!pullRequest) {
-      core.debug('Could not get pull request from context');
-
-      return;
-    }
+    const userArr = JSON.parse(users);
+    const teamsArr = JSON.parse(teams);
+    const appsArr = JSON.parse(apps);
 
     const owner = context.repo.owner;
     const repo = context.repo.repo;
@@ -26,7 +21,7 @@ const run = async (): Promise<void> => {
     const octokit = getOctokit(token);
 
     // Block the given branch for specific entities
-    await blockBranch(octokit, owner, repo, branchName, users, teams, apps);
+    await blockBranch(octokit, owner, repo, branchName, userArr, teamsArr, appsArr);
   } catch (error) {
     if (error instanceof Error) {
       core.error(error);

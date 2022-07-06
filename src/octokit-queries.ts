@@ -1,4 +1,3 @@
-import * as core from '@actions/core';
 import { GitHub } from '@actions/github/lib/utils';
 
 export const blockBranch = async (

@@ -1,5 +1,5 @@
-name: 'Team Label Action'
-description: "Add a team label based on the author's teams in the organization"
+name: 'Branch Block Action'
+description: "Blocks access of a branch to specific entities"
 author: 'EquityBee'
 branding:
   icon: 'tag'
@@ -8,9 +8,18 @@ inputs:
   repo-token:
     required: true
     description: 'The GITHUB_TOKEN secret'
-  organization-name:
+  branch-name:
     required: true
-    description: 'Tis the name/slug of your Github organization (it comes right after https://github.com/)'
+    description: 'The name of the branch to which access will be restricted'
+  users:
+    required: true
+    description: 'List of users to restrict access to. Empty list will restrict it to everyone'
+  teams:
+    required: true
+    description: 'List of teams to restrict access to. Empty list will restrict it to everyone'
+  apps:
+    required: true
+    description: 'List of apps to restrict access to. Empty list will restrict it to everyone'
 runs:
   using: 'node12'
   main: 'dist/index.js'
