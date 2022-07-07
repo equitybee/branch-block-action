@@ -1,6 +1,6 @@
 # Block Branch Access Action
 
-Use this Github action to automatically add a label to PRs based on the teams the PR author belongs to.
+Use this Github action to automatically block access to only certain entities to a specific branch
 
 ## Why did we build this?
 
